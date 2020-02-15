@@ -1,11 +1,14 @@
 {
   "compilerOptions": {
-    "lib": ["ES2015"],
-    "module": "commonJS",
-    "target": "es5",
+    "lib": ["es2019"],
+    "module": "esnext",
+    "target": "es2015",
     "outDir": "./dist",
     "baseUrl": "./src",
+    "types": ["jest", "node"],
+    "typeRoots": ["node_modules/@types"],
     "declaration": true,
+    "esModuleInterop": true,
     "noImplicitAny": true,
     "preserveConstEnums": true,
     "removeComments": true,
