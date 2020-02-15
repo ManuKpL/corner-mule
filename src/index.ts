@@ -1,1 +1,1 @@
-export const TEST_MULE = "corner-mule";
+export const TEST_MULE = 'corner-mule';

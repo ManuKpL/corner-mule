@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
+    "lib": ["ES2015"],
     "module": "commonJS",
     "target": "es5",
     "outDir": "./dist",
+    "baseUrl": "./src",
     "declaration": true,
     "noImplicitAny": true,
     "preserveConstEnums": true,
