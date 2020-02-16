@@ -116,4 +116,28 @@ describe('TestMule', () => {
       );
     });
   });
+
+  describe('deleteSpies()', () => {
+    test('should return void', () => {
+      expect(testSuite.instance.deleteSpies()).toBe(void 0);
+    });
+
+    test('given spies already stores in the spies map, then should remove all of them', () => {
+      testSuite.instance.addSpy(testSuite.spySource, 'foo');
+      testSuite.instance.addSpy({ bar: () => 'bar' }, 'bar');
+      testSuite.instance.addSpy({ qux: () => 'qux' }, 'qux');
+
+      expect(Object.entries(testSuite.instance.spies)).toHaveLength(3);
+
+      testSuite.instance.deleteSpies();
+      expect(Object.entries(testSuite.instance.spies)).toHaveLength(0);
+    });
+
+    test('given no spies stored in the spies map, then should do nothing and not throw an error', () => {
+      expect(Object.entries(testSuite.instance.spies)).toHaveLength(0);
+
+      expect(() => testSuite.instance.deleteSpies()).not.toThrowError();
+      expect(Object.entries(testSuite.instance.spies)).toHaveLength(0);
+    });
+  });
 });

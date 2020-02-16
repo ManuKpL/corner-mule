@@ -14,22 +14,31 @@ export class TestMule<T = any> {
     spyName = methodName,
   ): TestMule {
     this.ensureUniqSpies(spyName);
+
     this.spiesMap.set(spyName, jest.spyOn(source, methodName));
     return this;
   }
 
   public removeSpy(spyName: string): TestMule {
-    if (this.spiesMap.has(spyName)) {
-      this.spiesMap.delete(spyName);
-      return this;
-    }
+    this.ensureKnowSpies(spyName);
 
-    this.throwSpyError(spyName, 'does not exist');
+    this.spiesMap.delete(spyName);
+    return this;
+  }
+
+  public deleteSpies(): void {
+    this.spiesMap.clear();
   }
 
   private ensureUniqSpies(spyName: string): void {
     if (this.spiesMap.has(spyName)) {
       this.throwSpyError(spyName, 'already exists');
+    }
+  }
+
+  private ensureKnowSpies(spyName: string) {
+    if (!this.spiesMap.has(spyName)) {
+      this.throwSpyError(spyName, 'does not exist');
     }
   }
 
