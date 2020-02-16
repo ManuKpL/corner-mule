@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "lib": ["es2019"],
-    "module": "esnext",
-    "target": "es2015",
+    "module": "commonJS",
+    "target": "es5",
     "outDir": "./dist",
     "baseUrl": "./src",
     "types": ["jest", "node"],

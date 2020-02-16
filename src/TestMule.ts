@@ -18,11 +18,24 @@ export class TestMule<T = any> {
     return this;
   }
 
+  public removeSpy(spyName: string): TestMule {
+    if (this.spiesMap.has(spyName)) {
+      this.spiesMap.delete(spyName);
+      return this;
+    }
+
+    this.throwSpyError(spyName, 'does not exist');
+  }
+
   private ensureUniqSpies(spyName: string): void {
     if (this.spiesMap.has(spyName)) {
-      throw new Error(
-        `A spy with the name [${spyName}] already exists in this test mule`,
-      );
+      this.throwSpyError(spyName, 'already exists');
     }
+  }
+
+  private throwSpyError(spyName: string, message: string): void {
+    throw new Error(
+      `A spy with the name [${spyName}] ${message} in this test mule`,
+    );
   }
 }
