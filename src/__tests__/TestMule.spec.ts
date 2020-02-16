@@ -33,9 +33,18 @@ describe('TestMule', () => {
       expect(testSuite.instance.spies).toBeInstanceOf(Object);
     });
 
+    test('should not allow adding members to the spies object property', () => {
+      expect(() => (testSuite.instance.spies.foo = jest.fn())).toThrowError();
+    });
+
     test('should be created with an empty wrapping object for values', () => {
       expect(testSuite.instance.values).toBeTruthy();
       expect(testSuite.instance.values).toBeInstanceOf(Object);
+    });
+
+    test('should allow adding members to the values object property', () => {
+      expect(() => (testSuite.instance.values.foo = 'foo')).not.toThrowError();
+      expect(testSuite.instance.values).toStrictEqual({ foo: 'foo' });
     });
   });
 

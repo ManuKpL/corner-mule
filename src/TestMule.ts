@@ -5,7 +5,7 @@ export class TestMule<T = any> {
   private readonly spiesMap = new Map<string, jest.SpyInstance>();
 
   public get spies(): { [key: string]: jest.SpyInstance } {
-    return Object.fromEntries(this.spiesMap);
+    return Object.freeze(Object.fromEntries(this.spiesMap));
   }
 
   public addSpy(
