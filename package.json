@@ -30,7 +30,6 @@
   "devDependencies": {
     "@types/jest": "^25.1.2",
     "@types/node": "^13.7.1",
-    "jest": "^25.1.0",
     "jest-junit": "^10.0.0",
     "prettier": "^1.19.1",
     "ts-jest": "^25.2.0",
@@ -38,6 +37,9 @@
     "tslint-config-prettier": "^1.18.0",
     "tslint-eslint-rules": "^5.4.0",
     "typescript": "^3.7.5"
+  },
+  "peerDependencies": {
+    "jest": "^25.1.0"
   },
   "engines": {
     "node": ">=8.11.2"
