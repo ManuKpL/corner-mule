@@ -1,3 +1,5 @@
+import { FunctionPropertyNames } from './jest-types';
+
 export class TestMule<T = any> {
   public instance!: T;
   public readonly values: { [key: string]: any } = {};
@@ -8,10 +10,10 @@ export class TestMule<T = any> {
     return Object.freeze(Object.fromEntries(this.spiesMap));
   }
 
-  public addSpy(
-    source: { [key: string]: any },
-    methodName: string,
-    spyName = methodName,
+  public addSpy<Y extends {}>(
+    source: Y,
+    methodName: FunctionPropertyNames<Y>,
+    spyName: string = methodName,
   ): TestMule {
     this.ensureUniqSpies(spyName);
 
@@ -20,7 +22,7 @@ export class TestMule<T = any> {
   }
 
   public removeSpy(spyName: string): TestMule {
-    this.ensureKnowSpies(spyName);
+    this.ensureKnownSpies(spyName);
 
     this.spiesMap.delete(spyName);
     return this;
@@ -36,7 +38,7 @@ export class TestMule<T = any> {
     }
   }
 
-  private ensureKnowSpies(spyName: string) {
+  private ensureKnownSpies(spyName: string) {
     if (!this.spiesMap.has(spyName)) {
       this.throwSpyError(spyName, 'does not exist');
     }
